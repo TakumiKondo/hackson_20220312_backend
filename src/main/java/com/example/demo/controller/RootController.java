@@ -29,7 +29,14 @@ public class RootController {
 	@PostMapping("/customers")
 	public String add(@RequestParam Map<String, String> params, Model model) {
 		System.out.println("add params : " + params);
-		return null;
+//		以下の形式のJSON
+//		{
+//		name:"AAA",
+//		birthday:"1995-07-02",
+//		payment_code:"1",
+//		gender:"1"
+//		}
+		return "{\"result\":\"ok\"}";
 	}
 	
 	@GetMapping("/customers/{id}")
@@ -69,7 +76,8 @@ public class RootController {
 		searchForm.setBirthdayFrom(params.get("birthdayFrom"));
 		searchForm.setBirthdayTo(params.get("birthdayTo"));
 
-//		service.selectMany(searchForm);
+//		List<Customer> customersFromService = service.selectMany(searchForm);
+		
 		Customer c1 = new Customer();
 		c1.setId(1);
 		c1.setName("AAA");
@@ -104,7 +112,7 @@ public class RootController {
 		List<Customer> customers = Arrays.asList(c1, c2);		
 		
 		System.out.println("customers : " + customers);
-		
+//		System.out.println("customersFromService : " + customersFromService);
 		
 		return customers;
 	}
