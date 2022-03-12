@@ -9,7 +9,7 @@ import lombok.Data;
 public class Customer {
 	private Integer id;
 	private String name;
-	private List<Ticket> tickets;
+	private String  paymentName;
 	private LocalDate birthday;
 	private String gender;
 	private List<History> histories;

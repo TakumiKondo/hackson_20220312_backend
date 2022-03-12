@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +37,14 @@ public class RootController {
 //		payment_code:"1",
 //		gender:"1"
 //		}
+		Customer customer = new Customer();
+		customer.setName(params.get("name"));
+		customer.setBirthday(LocalDate.parse(params.get("name"), 	DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		customer.setGender(params.get("gender"));
+		List<Ticket> tickets = new ArrayList<>();
+		Ticket ticket = new Ticket();
+//		customer.setTickets(params.get("gender"));
+		
 		return "{\"result\":\"ok\"}";
 	}
 	
@@ -45,22 +54,22 @@ public class RootController {
 		
 		Customer c1 = new Customer();
 		c1.setId(111);
-		c1.setName("AA");
+		c1.setName("田中 太郎");
 		c1.setBirthday(LocalDate.of(1995, 7, 2));
-		c1.setGender("1");
+		c1.setGender("男性");
 	
-		Ticket t1 = new Ticket();
-		t1.setId(234);
-		t1.setPaymentCode("1");
-		t1.setPaymentName("10回払い");
-		t1.setRemaining(8);
-		Ticket t2 = new Ticket();
-		t2.setId(235);
-		t2.setPaymentCode("3");
-		t2.setPaymentName("月会員");
-		t2.setRemaining(null);
-		List<Ticket> tickets1 = new ArrayList<>(Arrays.asList(t1, t2));
-		c1.setTickets(tickets1);
+//		Ticket t1 = new Ticket();
+//		t1.setId(234);
+//		t1.setPaymentCode("1");
+//		t1.setPaymentName("10回払い");
+//		t1.setRemaining(8);
+//		Ticket t2 = new Ticket();
+//		t2.setId(235);
+//		t2.setPaymentCode("3");
+//		t2.setPaymentName("月会員");
+//		t2.setRemaining(null);
+//		List<Ticket> tickets1 = new ArrayList<>(Arrays.asList(t1, t2));
+		c1.setPaymentName("10回払い");
 		
 		System.out.println("Customer : " + c1);
 		
@@ -80,34 +89,34 @@ public class RootController {
 		
 		Customer c1 = new Customer();
 		c1.setId(1);
-		c1.setName("AAA");
+		c1.setName("近藤 巧");
 		c1.setBirthday(LocalDate.of(1995, 1, 1));
-		c1.setGender("1");
+		c1.setGender("男性");
 		Ticket t1 = new Ticket();
 		t1.setId(234);
 		t1.setPaymentCode("1");
 		t1.setPaymentName("10回払い");
 		t1.setRemaining(8);
-		Ticket t2 = new Ticket();
-		t2.setId(235);
-		t2.setPaymentCode("3");
-		t2.setPaymentName("月会員");
-		t2.setRemaining(null);
-		List<Ticket> tickets1 = new ArrayList<>(Arrays.asList(t1, t2));
-		c1.setTickets(tickets1);
+//		Ticket t2 = new Ticket();
+//		t2.setId(235);
+//		t2.setPaymentCode("3");
+//		t2.setPaymentName("月会員");
+//		t2.setRemaining(null);
+//		List<Ticket> tickets1 = new ArrayList<>(Arrays.asList(t1));
+		c1.setPaymentName("10回払い");
 
 		Customer c2 = new Customer();
 		c2.setId(1);
-		c2.setName("AAB");
+		c2.setName("川尻 エリカ");
 		c2.setBirthday(LocalDate.of(1995, 9, 2));
-		c2.setGender("2");
-		Ticket t3 = new Ticket();
-		t3.setId(236);
-		t3.setPaymentCode("4");
-		t3.setPaymentName("年会員");
-		t3.setRemaining(null);
-		List<Ticket> tickets2 = new ArrayList<>(Arrays.asList(t3));
-		c2.setTickets(tickets2);
+		c2.setGender("女性");
+//		Ticket t3 = new Ticket();
+//		t3.setId(236);
+//		t3.setPaymentCode("4");
+//		t3.setPaymentName("年会員");
+//		t3.setRemaining(null);
+//		List<Ticket> tickets2 = new ArrayList<>(Arrays.asList(t3));
+		c2.setPaymentName("年会員");
 		
 		List<Customer> customers = Arrays.asList(c1, c2);		
 		
@@ -123,7 +132,7 @@ public class RootController {
 		c1.setId(111);
 		c1.setName("AA");
 		c1.setBirthday(LocalDate.of(1995, 7, 2));
-		c1.setGender("1");
+		c1.setGender("男性");
 		History h1 = new History();
 		History h2 = new History();
 		h1.setHistoryId(123);
@@ -137,12 +146,12 @@ public class RootController {
 		List<History> histories = Arrays.asList(h1, h2);
 		c1.setHistories(histories);
 		
-		Ticket t1 = new Ticket();
-		t1.setId(301);
-		t1.setPaymentCode("1");
-		t1.setPaymentName("10回払い");
-		t1.setRemaining(8);
-		c1.setTickets(Arrays.asList(t1));
+//		Ticket t1 = new Ticket();
+//		t1.setId(301);
+//		t1.setPaymentCode("1");
+//		t1.setPaymentName("10回払い");
+//		t1.setRemaining(8);
+		c1.setPaymentName("10回払い");
 		
 		System.out.println("customer : " + c1);
 		
