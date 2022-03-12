@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +25,37 @@ public class RootController {
 	@Qualifier("RestServiceImpl")
 	RestService service;
 	
+	@GetMapping("/customers/{id}")
+	public Customer selectOne(@PathVariable String id, Model model) {
+		System.out.println("id : " + id);
+		
+		Customer c1 = new Customer();
+		c1.setId(111);
+		c1.setName("AA");
+		c1.setBirthday(LocalDate.of(1995, 7, 2));
+		c1.setGender("1");
+	
+		Ticket t1 = new Ticket();
+		t1.setId(234);
+		t1.setPaymentCode("1");
+		t1.setPaymentName("10回払い");
+		t1.setRemaining(8);
+		Ticket t2 = new Ticket();
+		t2.setId(235);
+		t2.setPaymentCode("3");
+		t2.setPaymentName("月会員");
+		t2.setRemaining(null);
+		List<Ticket> tickets1 = new ArrayList<>(Arrays.asList(t1, t2));
+		c1.setTickets(tickets1);
+		
+		System.out.println("Customer : " + c1);
+		
+		return c1;
+	}
+	
 	@GetMapping("/customers")
 	public List<Customer> selectMany(@RequestParam Map<String, String> params, Model model) {
-		System.out.println("params : " + params);
+		System.out.println("customers params : " + params);
 		
 		SearchForm searchForm = new SearchForm();
 		searchForm.setName(params.get("name"));
