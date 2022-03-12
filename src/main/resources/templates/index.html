@@ -1,0 +1,31 @@
+	
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+		<form th:action="@{/customers}" method="get">
+			<table>
+				<tbody>
+					<tr>
+						<td>書籍名</td><td><input type="text" name="name"></td>
+					</tr>
+					<tr>
+						<td>誕生日</td><td><input type="date" name="birthdayFrom">
+							～ <input type="date" name="birthdayTo"></td>
+					</tr>
+					<tr>
+						<td>支払区分</td><td><input type="number" name="paimentCodes"></td>
+					</tr>
+				</tbody>
+				<tfoot align="center">
+					<tr><td colspan="4"><button type="submit">検索</button></td></tr>
+				</tfoot>
+			</table>
+		</form>
+		<hr>
+</body>
+</html>
