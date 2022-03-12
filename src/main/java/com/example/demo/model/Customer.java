@@ -12,4 +12,5 @@ public class Customer {
 	private List<Ticket> tickets;
 	private LocalDate birthday;
 	private String gender;
+	private List<History> histories;
 }
