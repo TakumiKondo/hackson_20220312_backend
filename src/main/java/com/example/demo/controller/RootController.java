@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,12 @@ public class RootController {
 	
 	@Qualifier("RestServiceImpl")
 	RestService service;
+	
+	@PostMapping("/customers")
+	public String add(@RequestParam Map<String, String> params, Model model) {
+		System.out.println("add params : " + params);
+		return null;
+	}
 	
 	@GetMapping("/customers/{id}")
 	public Customer selectOne(@PathVariable String id, Model model) {
@@ -103,7 +110,7 @@ public class RootController {
 	}
 	
 	@GetMapping("/history")
-	public List<Customer> getOne(@RequestParam Map<String, String> params, Model model) {
+	public Customer getOne(@RequestParam Map<String, String> params, Model model) {
 		Customer c1 = new Customer();
 		c1.setId(111);
 		c1.setName("AA");
@@ -131,7 +138,7 @@ public class RootController {
 		
 		System.out.println("customer : " + c1);
 		
-		return null;
+		return c1;
 	}
 	
 }
