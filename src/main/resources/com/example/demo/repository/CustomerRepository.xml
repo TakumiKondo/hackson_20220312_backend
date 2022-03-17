@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.repository.CustomerRepository">
+	<resultMap type="com.example.demo.model.Customer" id="customer">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="birthday" property="birthday" />
+		<result column="gender" property="gender" />
+	</resultMap>
+
+	<select id="selectMany" resultMap="customer">
+		SELECT *
+		FROM Customer c
+			INNER JOIN Ticket t ON t.customer_id = c.id
+		WHERE 0 = 0
+		<if test="name != ''">
+			<bind name="name_pattern" value="'%' + name + '%'" />
+			AND name LIKE #{name_pattern}
+		</if>
+<!--		<if test="paymentCodes != null">-->
+<!--			payment_code in-->
+<!--			<foreach item="paymentCodes" open="(" close=")" collection="list" separator=",">-->
+<!--				#{paymentCodes}-->
+<!--			</foreach>-->
+<!--	渡す引数（SearchForm）がオブジェクトの場合、collectionにはフィールド名を直接指定すること	-->
+		<foreach item="paymentCodes" collection="paymentCodes"
+				 open="AND payment_code in (" separator="," close=")" nullable="true">
+			#{paymentCodes}
+		</foreach>
+<!--		</if>-->
+	<!-- 	<choose>-->
+	<!--    	<when test="birthdayFrom != '' and birthdayTo != ''">-->
+	<!--      		AND price BETWEEN #{birthdayFrom} and #{birthdayTo}-->
+	<!--    	</when>-->
+	<!--    	<when test="birthdayFrom != ''">-->
+	<!--      		AND price <![CDATA[ >= ]]> #{birthdayFrom}-->
+	<!--    	</when>-->
+	<!--    	<when test="birthdayTo != ''">-->
+	<!--      		AND price <![CDATA[ <= ]]> #{birthdayTo}-->
+	<!--    	</when>-->
+	<!--  	</choose>-->
+	</select>
+
+</mapper>

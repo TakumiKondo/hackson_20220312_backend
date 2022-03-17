@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `Customer` (
 	`id` INTEGER  PRIMARY KEY AUTO_INCREMENT,
 	`name` VARCHAR(50) NOT NULL,
 	`birthday` date,
-	`gnder` VARCHAR(2)
+	`gender` VARCHAR(2)
 );
 
 CREATE TABLE IF NOT EXISTS `Ticket` (

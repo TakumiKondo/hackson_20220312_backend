@@ -10,5 +10,5 @@ public class SearchForm {
 	private String name;
 	private String birthdayFrom;
 	private String birthdayTo;
-	private List<String> paimentCodes;
+	private List<String> paymentCodes;
 }

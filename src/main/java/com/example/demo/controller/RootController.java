@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,8 @@ import com.example.demo.service.RestService;
 @RestController
 public class RootController {
 	
-	@Qualifier("RestServiceImpl")
+	@Qualifier("restServiceImpl")
+	@Autowired
 	RestService service;
 	
 	@PostMapping("/customers")
@@ -77,52 +80,21 @@ public class RootController {
 	}
 	
 	@GetMapping("/customers")
-	public List<Customer> selectMany(@RequestParam Map<String, String> params, Model model) {
+	public List<Customer> selectMany(@RequestParam Map<String, String> params,
+									 @RequestParam(value = "paymentCodes", required = false) String[] paymentCodes) {
 		System.out.println("customers params : " + params);
-		
+		System.out.println("paymentCodes : " + Arrays.stream(paymentCodes).collect(Collectors.toList()));
+
 		SearchForm searchForm = new SearchForm();
 		searchForm.setName(params.get("name"));
 		searchForm.setBirthdayFrom(params.get("birthdayFrom"));
 		searchForm.setBirthdayTo(params.get("birthdayTo"));
+		searchForm.setPaymentCodes(Arrays.stream(paymentCodes).collect(Collectors.toList()));
 
-//		List<Customer> customersFromService = service.selectMany(searchForm);
-		
-		Customer c1 = new Customer();
-		c1.setId(1);
-		c1.setName("近藤 巧");
-		c1.setBirthday(LocalDate.of(1995, 1, 1));
-		c1.setGender("男性");
-		Ticket t1 = new Ticket();
-		t1.setId(234);
-		t1.setPaymentCode("1");
-		t1.setPaymentName("10回払い");
-		t1.setRemaining(8);
-//		Ticket t2 = new Ticket();
-//		t2.setId(235);
-//		t2.setPaymentCode("3");
-//		t2.setPaymentName("月会員");
-//		t2.setRemaining(null);
-//		List<Ticket> tickets1 = new ArrayList<>(Arrays.asList(t1));
-		c1.setPaymentName("10回払い");
+		List<Customer> customers = service.selectMany(searchForm);
+		customers.stream()
+				.forEach(c -> System.out.println(c));
 
-		Customer c2 = new Customer();
-		c2.setId(1);
-		c2.setName("川尻 エリカ");
-		c2.setBirthday(LocalDate.of(1995, 9, 2));
-		c2.setGender("女性");
-//		Ticket t3 = new Ticket();
-//		t3.setId(236);
-//		t3.setPaymentCode("4");
-//		t3.setPaymentName("年会員");
-//		t3.setRemaining(null);
-//		List<Ticket> tickets2 = new ArrayList<>(Arrays.asList(t3));
-		c2.setPaymentName("年会員");
-		
-		List<Customer> customers = Arrays.asList(c1, c2);		
-		
-		System.out.println("customers : " + customers);
-//		System.out.println("customersFromService : " + customersFromService);
-		
 		return customers;
 	}
 	
