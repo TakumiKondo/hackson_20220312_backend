@@ -23,6 +23,7 @@ public class RestServiceImpl  implements RestService {
 
 	@Override
 	public List<Customer> selectMany(SearchForm searchForm) {
+
 		return repository.selectMany(searchForm);
 	}
 }

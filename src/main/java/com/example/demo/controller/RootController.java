@@ -2,15 +2,15 @@ package com.example.demo.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,9 +30,9 @@ public class RootController {
 	@Autowired
 	RestService service;
 	
-	@PostMapping("/customers")
-	public String add(@RequestParam Map<String, String> params, Model model) {
-		System.out.println("add params : " + params);
+	@PostMapping("/customer")
+	public String add(@Validated Customer customer, Model model) {
+		System.out.println("customer : " + customer);
 //		以下の形式のJSON
 //		{
 //		name:"AAA",
@@ -40,10 +40,10 @@ public class RootController {
 //		payment_code:"1",
 //		gender:"1"
 //		}
-		Customer customer = new Customer();
-		customer.setName(params.get("name"));
-		customer.setBirthday(LocalDate.parse(params.get("name"), 	DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-		customer.setGender(params.get("gender"));
+//		Customer customer = new Customer();
+//		customer.setName(params.get("name"));
+//		customer.setBirthday(LocalDate.parse(params.get("name"), 	DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+//		customer.setGender(params.get("gender"));
 		List<Ticket> tickets = new ArrayList<>();
 		Ticket ticket = new Ticket();
 //		customer.setTickets(params.get("gender"));
@@ -72,7 +72,7 @@ public class RootController {
 //		t2.setPaymentName("月会員");
 //		t2.setRemaining(null);
 //		List<Ticket> tickets1 = new ArrayList<>(Arrays.asList(t1, t2));
-		c1.setPaymentName("10回払い");
+//		c1.setPaymentName("10回払い");
 		
 		System.out.println("Customer : " + c1);
 		
@@ -80,21 +80,8 @@ public class RootController {
 	}
 	
 	@GetMapping("/customers")
-	public List<Customer> selectMany(@RequestParam Map<String, String> params,
-									 @RequestParam(value = "paymentCodes", required = false) String[] paymentCodes) {
-		System.out.println("customers params : " + params);
-		System.out.println("paymentCodes : " + Arrays.stream(paymentCodes).collect(Collectors.toList()));
-
-		SearchForm searchForm = new SearchForm();
-		searchForm.setName(params.get("name"));
-		searchForm.setBirthdayFrom(params.get("birthdayFrom"));
-		searchForm.setBirthdayTo(params.get("birthdayTo"));
-		searchForm.setPaymentCodes(Arrays.stream(paymentCodes).collect(Collectors.toList()));
-
-		List<Customer> customers = service.selectMany(searchForm);
-		customers.stream()
-				.forEach(c -> System.out.println(c));
-
+	public List<Customer> selectMany(@Validated SearchForm form) {
+		List<Customer> customers = service.selectMany(form);
 		return customers;
 	}
 	
@@ -123,7 +110,7 @@ public class RootController {
 //		t1.setPaymentCode("1");
 //		t1.setPaymentName("10回払い");
 //		t1.setRemaining(8);
-		c1.setPaymentName("10回払い");
+//		c1.setPaymentName("10回払い");
 		
 		System.out.println("customer : " + c1);
 		
