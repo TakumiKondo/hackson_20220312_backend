@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.ibatis.annotations.Param;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
@@ -25,13 +27,15 @@ import com.example.demo.service.RestService;
 
 @RestController
 public class RootController {
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(RootController.class);
+
 	@Qualifier("restServiceImpl")
 	@Autowired
 	RestService service;
 	
 	@PostMapping("/customer")
 	public String add(@Validated Customer customer, Model model) {
+		LOGGER.info("adding is " + customer);
 		service.save(customer);
 		return "{\"result\":\"ok\"}";
 	}
@@ -66,6 +70,7 @@ public class RootController {
 	
 	@GetMapping("/customers")
 	public List<Customer> selectMany(@Validated SearchForm form) {
+		LOGGER.info("search param is " + form);
 		List<Customer> customers = service.selectMany(form);
 		return customers;
 	}
