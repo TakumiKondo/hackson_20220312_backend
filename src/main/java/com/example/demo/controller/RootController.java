@@ -37,7 +37,7 @@ public class RootController {
 	public String add(@Validated Customer customer, Model model) {
 		LOGGER.info("adding is " + customer);
 		service.save(customer);
-		return "{\"result\":\"ok\"}";
+		return "{\"status\":\"200\"}";
 	}
 	
 	@GetMapping("/customers/{id}")
