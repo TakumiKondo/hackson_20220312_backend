@@ -16,6 +16,14 @@
 			<result property="startDate" column="ticket_start_date"/>
 			<result property="limitDate" column="ticket_limit_date"/>
 		</collection>
+		<collection property="histories" ofType="com.example.demo.model.History">
+			<id property="id" column="history_id" />
+			<result property="customerId" column="history_customer_id"/>
+			<result property="ticketId" column="history_ticket_Id"/>
+			<result property="storeId" column="history_store_Id"/>
+			<result property="useDate" column="history_use_date"/>
+			<result property="staffId" column="history_staff_Id"/>
+		</collection>
 	</resultMap>
 
 	<select id="selectMany" resultMap="customer">
@@ -30,8 +38,15 @@
 			,t.remaining as ticket_remaining
 			,t.start_date as ticket_start_date
 			,t.limit_date as ticket_limit_date
+			,h.id as history_id
+			,h.customer_id as history_customer_id
+			,h.ticket_Id as history_ticket_Id
+			,h.store_Id as history_store_Id
+			,h.use_date as history_use_date
+			,h.staff_Id as history_staff_Id
 		FROM Customer c
-			INNER JOIN Ticket t ON t.customer_id = c.id
+			LEFT JOIN Ticket t ON t.customer_id = c.id
+			LEFT JOIN History h ON h.customer_id = c.id
 		WHERE 0 = 0
 		<if test="name != ''">
 			<bind name="name_pattern" value="'%' + name + '%'" />

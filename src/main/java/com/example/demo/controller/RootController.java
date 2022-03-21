@@ -40,13 +40,7 @@ public class RootController {
 //		payment_code:"1",
 //		gender:"1"
 //		}
-//		Customer customer = new Customer();
-//		customer.setName(params.get("name"));
-//		customer.setBirthday(LocalDate.parse(params.get("name"), 	DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-//		customer.setGender(params.get("gender"));
-		List<Ticket> tickets = new ArrayList<>();
-		Ticket ticket = new Ticket();
-//		customer.setTickets(params.get("gender"));
+		service.save(customer);
 		
 		return "{\"result\":\"ok\"}";
 	}
@@ -94,8 +88,8 @@ public class RootController {
 		c1.setGender("男性");
 		History h1 = new History();
 		History h2 = new History();
-		h1.setHistoryId(123);
-		h2.setHistoryId(124);
+		h1.setId(123);
+		h2.setId(124);
 		h1.setUseDate(LocalDate.of(2022, 1, 10));
 		h2.setUseDate(LocalDate.of(2022, 2, 15));
 		h1.setStoreId(1);

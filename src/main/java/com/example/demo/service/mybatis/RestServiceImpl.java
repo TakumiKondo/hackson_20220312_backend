@@ -14,16 +14,19 @@ import com.example.demo.service.RestService;
 
 @Transactional
 @Service("restServiceImpl")
-public class RestServiceImpl  implements RestService {
-//	@Autowired
-//	CustomerMapper customerMapper;
+public class RestServiceImpl implements RestService {
 
 	@Autowired
 	CustomerRepository repository;
 
 	@Override
 	public List<Customer> selectMany(SearchForm searchForm) {
-
 		return repository.selectMany(searchForm);
 	}
+
+	@Override
+	public void save(Customer customer) {
+		repository.save(customer);
+	}
+
 }

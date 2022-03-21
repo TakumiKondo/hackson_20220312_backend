@@ -12,7 +12,16 @@ INSERT INTO Customer VALUES (3, '鈴木', '1990-03-01', '2');
 INSERT INTO Customer VALUES (4, '佐々木', '1990-04-01', '2');
 
 INSERT INTO Ticket VALUES (1, '1', '10回払い', 10, null, null, 1);
-INSERT INTO Ticket VALUES (2, '1', '20回払い', 3, null, null, 2);
-INSERT INTO Ticket VALUES (3, '2', '月会員', 20, null, null, 2);
-INSERT INTO Ticket VALUES (4, '3', '年会員', null, '2021-12-31', '2022-01-31', 3);
+INSERT INTO Ticket VALUES (2, '2', '20回払い', 3, null, null, 2);
+INSERT INTO Ticket VALUES (3, '3', '月会員', 20, '2022-01-01', '2022-01-31', 2);
+INSERT INTO Ticket VALUES (4, '4', '年会員', null, '2021-01-01', '2022-01-31', 3);
+INSERT INTO Ticket VALUES (5, '4', '年会員', null, '2021-01-01', '2022-01-31', 4);
 
+INSERT INTO History VALUES (1, 2, 2, 1, '2022-01-01', 1);
+INSERT INTO History VALUES (2, 2, 2, 1, '2022-02-01', 2);
+INSERT INTO History VALUES (3, 2, 2, 2, '2022-03-01', 3);
+INSERT INTO History VALUES (4, 2, 2, 2, '2022-04-01', 4);
+INSERT INTO History VALUES (5, 2, 2, 1, '2022-02-01', 2);
+INSERT INTO History VALUES (6, 2, 2, 2, '2022-03-01', 3);
+INSERT INTO History VALUES (7, 2, 2, 2, '2022-04-01', 4);
+INSERT INTO History VALUES (8, 3, 4, 1, '2021-04-20', 2);

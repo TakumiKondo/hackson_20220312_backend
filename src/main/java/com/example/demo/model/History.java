@@ -6,7 +6,9 @@ import lombok.Data;
 
 @Data
 public class History {
-	private Integer historyId;
+	private Integer id;
+	private Integer ticketId;
+	private Integer customerId;
 	private LocalDate useDate;
 	private Integer storeId;
 	private Integer staffId;

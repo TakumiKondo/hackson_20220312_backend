@@ -9,5 +9,7 @@ import java.util.List;
 @Mapper
 public interface CustomerRepository {
     List<Customer> selectMany(SearchForm searchForm);
+
+    void save(Customer customer);
 }
 
