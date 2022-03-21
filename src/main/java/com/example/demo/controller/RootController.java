@@ -35,7 +35,7 @@ public class RootController {
 		return "{\"status\":\"200\"}";
 	}
 	
-	@GetMapping("/customers/{id}")
+	@GetMapping("/customer/{id}")
 	public Customer selectOne(@PathVariable String id) {
 		LOGGER.info("id is " + id);
 		return service.selectOne(id);

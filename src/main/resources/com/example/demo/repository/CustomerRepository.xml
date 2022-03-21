@@ -48,7 +48,7 @@
 			LEFT JOIN Ticket t ON t.customer_id = c.id
 			LEFT JOIN History h ON h.customer_id = c.id
 		WHERE 0 = 0
-		<if test="name != ''">
+		<if test="name != null and name != ''">
 			<bind name="name_pattern" value="'%' + name + '%'" />
 			AND c.name LIKE #{name_pattern}
 		</if>
@@ -57,10 +57,10 @@
 				 open="AND payment_code in (" separator="," close=")" nullable="true">
 			#{paymentCodes}
 		</foreach>
-		<if test="birthdayFrom != ''">
+		<if test="birthdayFrom != null and birthdayFrom != ''">
 			AND birthday <![CDATA[ >= ]]> #{birthdayFrom}
 		</if>
-		<if test="birthdayTo != ''">
+		<if test="birthdayTo != null and birthdayTo != ''">
 			AND birthday <![CDATA[ <= ]]> #{birthdayTo}
 		</if>
 	</select>
