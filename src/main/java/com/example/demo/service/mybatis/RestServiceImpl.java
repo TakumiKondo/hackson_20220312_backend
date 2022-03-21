@@ -29,4 +29,9 @@ public class RestServiceImpl implements RestService {
 		repository.save(customer);
 	}
 
+	@Override
+	public Customer selectOne(String id) {
+		return repository.selectOne(id);
+	}
+
 }

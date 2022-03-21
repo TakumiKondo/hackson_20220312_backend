@@ -1,12 +1,8 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Customer;
 import com.example.demo.model.History;
 import com.example.demo.model.SearchForm;
-import com.example.demo.model.Ticket;
 import com.example.demo.service.RestService;
 
 @RestController
@@ -41,31 +36,9 @@ public class RootController {
 	}
 	
 	@GetMapping("/customers/{id}")
-	public Customer selectOne(@PathVariable String id, Model model) {
-		System.out.println("id : " + id);
-		
-		Customer c1 = new Customer();
-		c1.setId(111);
-		c1.setName("田中 太郎");
-		c1.setBirthday(LocalDate.of(1995, 7, 2));
-		c1.setGender("男性");
-	
-//		Ticket t1 = new Ticket();
-//		t1.setId(234);
-//		t1.setPaymentCode("1");
-//		t1.setPaymentName("10回払い");
-//		t1.setRemaining(8);
-//		Ticket t2 = new Ticket();
-//		t2.setId(235);
-//		t2.setPaymentCode("3");
-//		t2.setPaymentName("月会員");
-//		t2.setRemaining(null);
-//		List<Ticket> tickets1 = new ArrayList<>(Arrays.asList(t1, t2));
-//		c1.setPaymentName("10回払い");
-		
-		System.out.println("Customer : " + c1);
-		
-		return c1;
+	public Customer selectOne(@PathVariable String id) {
+		LOGGER.info("id is " + id);
+		return service.selectOne(id);
 	}
 	
 	@GetMapping("/customers")

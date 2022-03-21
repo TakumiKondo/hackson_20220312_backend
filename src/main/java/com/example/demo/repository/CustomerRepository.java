@@ -11,5 +11,7 @@ public interface CustomerRepository {
     List<Customer> selectMany(SearchForm searchForm);
 
     void save(Customer customer);
+
+    Customer selectOne(String id);
 }
 

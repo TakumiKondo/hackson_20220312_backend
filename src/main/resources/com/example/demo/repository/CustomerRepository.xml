@@ -70,4 +70,28 @@
 		VALUES (#{name}, #{birthday}, #{gender})
 	</insert>
 
+	<select id="selectOne" resultMap="customer">
+		SELECT
+			c.id as customer_id
+			,c.name as customer_name
+			,c.birthday as customer_birthday
+			,c.gender as customer_gender
+			,t.id as ticket_id
+			,t.payment_code as ticket_payment_code
+			,t.name as ticket_name
+			,t.remaining as ticket_remaining
+			,t.start_date as ticket_start_date
+			,t.limit_date as ticket_limit_date
+			,h.id as history_id
+			,h.customer_id as history_customer_id
+			,h.ticket_Id as history_ticket_Id
+			,h.store_Id as history_store_Id
+			,h.use_date as history_use_date
+			,h.staff_Id as history_staff_Id
+		FROM Customer c
+			LEFT JOIN Ticket t ON t.customer_id = c.id
+			LEFT JOIN History h ON h.customer_id = c.id
+		WHERE c.id = #{id}
+	</select>
+
 </mapper>
