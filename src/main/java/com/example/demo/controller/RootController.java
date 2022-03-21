@@ -32,16 +32,7 @@ public class RootController {
 	
 	@PostMapping("/customer")
 	public String add(@Validated Customer customer, Model model) {
-		System.out.println("customer : " + customer);
-//		以下の形式のJSON
-//		{
-//		name:"AAA",
-//		birthday:"1995-07-02",
-//		payment_code:"1",
-//		gender:"1"
-//		}
 		service.save(customer);
-		
 		return "{\"result\":\"ok\"}";
 	}
 	

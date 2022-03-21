@@ -65,4 +65,9 @@
 		</if>
 	</select>
 
+	<insert id="save">
+		INSERT INTO Customer (name, birthday, gender)
+		VALUES (#{name}, #{birthday}, #{gender})
+	</insert>
+
 </mapper>
