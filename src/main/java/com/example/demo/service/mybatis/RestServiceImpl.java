@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.Customer;
 import com.example.demo.model.SearchForm;
-import com.example.demo.repository.mybatis.CustomerMapper;
 import com.example.demo.service.RestService;
 
 @Transactional
