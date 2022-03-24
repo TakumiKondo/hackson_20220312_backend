@@ -13,5 +13,9 @@ public interface CustomerRepository {
     void save(Customer customer);
 
     Customer selectOne(String id);
+
+    void update(Customer customer);
+
+    void delete(String id);
 }
 

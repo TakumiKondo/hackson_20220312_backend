@@ -1,19 +1,18 @@
 package com.example.demo.service.mybatis;
 
-import java.util.List;
-
+import com.example.demo.model.Customer;
+import com.example.demo.model.SearchForm;
 import com.example.demo.repository.CustomerRepository;
+import com.example.demo.service.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.model.Customer;
-import com.example.demo.model.SearchForm;
-import com.example.demo.service.RestService;
+import java.util.List;
 
 @Transactional
-@Service("restServiceImpl")
-public class RestServiceImpl implements RestService {
+@Service("ServiceImpl")
+public class ServiceImpl implements RestService {
 
 	@Autowired
 	CustomerRepository repository;

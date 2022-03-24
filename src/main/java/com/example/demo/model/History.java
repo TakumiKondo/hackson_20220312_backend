@@ -11,5 +11,7 @@ public class History {
 	private Integer customerId;
 	private LocalDate useDate;
 	private Integer storeId;
+	private String storeName;
 	private Integer staffId;
+	private String staffName;
 }

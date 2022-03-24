@@ -24,12 +24,12 @@ public class RootController {
 	@Autowired
 	RestService service;
 	
-	@PostMapping("/customer")
-	public String add(@Validated Customer customer) {
-		LOGGER.info("adding is " + customer);
-		service.save(customer);
-		return "{\"status\":\"200\"}";
-	}
+//	@PostMapping("/customer")
+//	public String add(@Validated Customer customer) {
+//		LOGGER.info("adding is " + customer);
+//		service.save(customer);
+//		return "{\"status\":\"200\"}";
+//	}
 	
 	@GetMapping("/customer/{id}")
 	public Customer selectOne(@PathVariable String id) {
@@ -37,10 +37,10 @@ public class RootController {
 		return service.selectOne(id);
 	}
 	
-	@GetMapping("/customers")
-	public List<Customer> selectMany(@Validated SearchForm form) {
-		LOGGER.info("search param is " + form);
-		return service.selectMany(form);
-	}
+//	@GetMapping("/customers")
+//	public List<Customer> selectMany(@Validated SearchForm form) {
+//		LOGGER.info("search param is " + form);
+//		return service.selectMany(form);
+//	}
 
 }

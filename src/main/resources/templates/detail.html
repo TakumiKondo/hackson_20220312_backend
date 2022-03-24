@@ -1,0 +1,67 @@
+	
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<header th:include="header::header"></header>
+
+	<table border="1" th:object="${customer}">
+		<tbody>
+			<tr>
+				<td colspan="4">基本情報</td>
+			</tr>
+			<tr>
+				<td>氏名</td><td>誕生日</td><td>性別</td>
+			</tr>
+			<tr>
+				<td><p th:text="*{name}" /></td>
+				<td><p th:text="*{birthday}" /></td>
+				<td>
+					<select name="gender" disabled>
+						<option value=""></option>
+						<option value="1" th:selected="*{gender} == 1">男性</option>
+						<option value="2" th:selected="*{gender} == 2">女性</option>
+						<option value="3" th:selected="*{gender} == 3">不明</option>
+					</select>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="4">保有チケット</td>
+			</tr>
+			<tr>
+				<td>チケット種別</td>
+				<td>残り回数</td>
+				<td>利用開始日</td>
+				<td>利用期限</td>
+			</tr>
+			<tr th:each="ticket : *{tickets}" th:object="${ticket}">
+				<td><p th:text="*{paymentName}" /></td>
+				<td><p th:text="*{remaining}" /></td>
+				<td><p th:text="*{startDate}" /></td>
+				<td><p th:text="*{limitDate}" /></td>
+			</tr>
+
+			<tr>
+				<td colspan="4">来店履歴</td>
+			</tr>
+			<tr>
+				<td>利用日</td>
+				<td>利用店舗</td>
+				<td>対応スタッフ</td>
+			</tr>
+			<tr th:each="history : *{histories}" th:object="${history}">
+				<td><p th:text="*{useDate}" /></td>
+				<td><p th:text="*{storeName}" /></td>
+				<td><p th:text="*{staffName}" /></td>
+			</tr>
+		</tbody>
+	</table>
+	<button type="button" onclick="history.back()">戻る</button>
+
+</body>
+</html>

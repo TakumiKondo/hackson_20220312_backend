@@ -1,0 +1,70 @@
+	
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<header th:include="header::header"></header>
+<body>
+	<header></header>
+	<form th:action="@{/customers}" method="get">
+		<table>
+			<tbody>
+				<tr>
+					<td>氏名</td><td><input type="text" name="name"></td>
+				</tr>
+				<tr>
+					<td>誕生日</td><td><input type="date" name="birthdayFrom">
+						～ <input type="date" name="birthdayTo"></td>
+				</tr>
+				<tr>
+					<td>支払区分</td>
+					<td>
+						<select multiple="multiple" name="paymentCodes">
+							<option value=""></option>
+							<option value="1">10回払い</option>
+							<option value="2">20回払い</option>
+							<option value="3">月会員</option>
+							<option value="4">年会員</option>
+						</select>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot align="center">
+				<tr><td colspan="4"><button type="submit">検索</button></td></tr>
+			</tfoot>
+		</table>
+	</form>
+	<hr>
+
+	<div th:if="${customers}">
+		<table border="1">
+			<thead>
+				<tr>
+					<td>名前</td>
+					<td>生年月日</td>
+					<td>性別</td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="customer : ${customers}" th:object="${customer}">
+					<td th:text="*{name}"></td>
+					<td th:text="*{birthday}"></td>
+					<td th:text="*{gender}"></td>
+					<td>
+						<a th:href="@{/edit/} + *{id}">編集</a>
+						<a th:href="@{/detail/} + *{id}">詳細</a>
+						<form th:action="@{/delete}" method="post">
+							<input type="hidden" name=id th:value="*{id}">
+							<button type="submit">削除</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

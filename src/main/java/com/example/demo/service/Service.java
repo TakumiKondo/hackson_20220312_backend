@@ -1,20 +1,16 @@
 package com.example.demo.service;
 
-import java.util.List;
-
 import com.example.demo.model.Customer;
 import com.example.demo.model.SearchForm;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
-public interface RestService {
+public interface Service {
 	List<Customer> selectMany(SearchForm searchForm);
 
     void save(Customer customer);
 
     Customer selectOne(String id);
-
-    void update(Customer customer);
-
-    void delete(String id);
 }
